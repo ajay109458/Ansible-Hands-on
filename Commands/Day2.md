@@ -1,0 +1,1 @@
+ansible-playbook -i config/hosts.ini playbooks/webserver.yaml

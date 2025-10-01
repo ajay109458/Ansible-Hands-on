@@ -1,0 +1,12 @@
+- name: Install common packages
+  hosts: webservers
+  become: true
+  tasks:
+    - name: Install packages
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - git
+        - curl
+        - unzip
