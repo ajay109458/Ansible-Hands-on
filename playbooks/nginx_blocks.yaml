@@ -1,0 +1,22 @@
+- name: Install and configure nginx
+  hosts: webservers
+  become: true
+  tasks:
+    - block:
+        - name: Install nginx
+          apt:
+            name: nginx
+            state: present
+
+        - name: Copy config file
+          template:
+            src: nginx.conf.j2
+            dest: /etc/nginx/sites-available/default
+      rescue:
+        - name: Fallback if something fails
+          debug:
+            msg: "Installation or copy failed, taking fallback action"
+      always:
+        - name: Always run cleanup
+          debug:
+            msg: "This will always run"

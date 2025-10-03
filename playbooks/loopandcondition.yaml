@@ -10,3 +10,8 @@
         - git
         - curl
         - unzip
+    - name: Install Apache only on Debian
+      apt:
+        name: apache2
+        state: present
+      when: ansible_os_family == "Debian"
